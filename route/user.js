@@ -38,4 +38,16 @@ router.post("/", async (req, res) => {
   res.status(200).send("Done");
 });
 
+router.put("/:id/status", async (req, res) => {
+  const online = req.body.online ? req.body.online : false;
+  const userRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(`${req.params.id}`);
+
+  if ((await userRef.get()).exists) await userRef.update({ online });
+
+  return res.status(200).send("Done");
+});
+
 module.exports = router;
