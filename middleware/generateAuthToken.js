@@ -7,6 +7,7 @@ function generateAuthToken(user) {
       id: user.id,
       email: user.email,
       name: user.name,
+      avatar: user.avatar,
     },
     config.get("jwtPrivateKey")
   );
