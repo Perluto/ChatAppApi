@@ -3,11 +3,10 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const firebase = require("firebase-admin");
 const { validateUser } = require("../model/user");
-const auth = require("../middleware/auth");
 const defaultAvatarURI =
   "https://firebasestorage.googleapis.com/v0/b/chat-app-e54db.appspot.com/o/avatar%2Fdefault.jpg?alt=media&token=4760ffca-72fe-481c-97a9-58448d23fd6e";
 
-router.post("/", [auth], async (req, res) => {
+router.post("/", async (req, res) => {
   const { email, password, name } = req.body;
 
   const userRef = firebase.firestore().collection("users");
