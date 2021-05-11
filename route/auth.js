@@ -23,6 +23,12 @@ router.post("/", async (req, res) => {
   if (!validPassword)
     return res.status(400).send({ error: "Invalid email or password." });
 
+  await firebase
+    .firestore()
+    .collection("users")
+    .doc(`${user.id}`)
+    .update({ online: true });
+
   const token = generateAuthToken({
     id: user.id,
     email: user.email,
@@ -30,7 +36,7 @@ router.post("/", async (req, res) => {
     avatar: user.avatar,
   });
 
-  res.send(token);
+  res.status(200).send(token);
 });
 
 module.exports = router;
