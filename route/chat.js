@@ -3,7 +3,7 @@ const router = express.Router();
 const firebase = require("firebase-admin");
 const auth = require("../middleware/auth");
 
-router.post("/", async (req, res) => {
+router.post("/", [auth], async (req, res) => {
   const { participants } = req.body;
   const participantsId = [];
 
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
     .send({ idRoomChat: result.id, roomName: participants[0]["name"] });
 });
 
-router.get("/:idUser", async (req, res) => {
+router.get("/:idUser", [auth], async (req, res) => {
   const id = req.params.idUser;
   const chatRef = firebase.firestore().collection("chats");
   const snapshot = await chatRef

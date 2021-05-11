@@ -18,6 +18,8 @@ app.use("/api/auth", auth);
 
 require("./db")();
 
+app.get("/", (req, res) => res.send("Hello"));
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
