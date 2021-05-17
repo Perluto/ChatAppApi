@@ -40,8 +40,8 @@ router.post("/", [auth], async (req, res) => {
     .send({ idRoomChat: result.id, roomName: participants[0]["name"] });
 });
 
-router.get("/:idUser", [auth], async (req, res) => {
-  const id = req.params.idUser;
+router.get("/", [auth], async (req, res) => {
+  const id = req.user.id;
   const chatRef = firebase.firestore().collection("chats");
   const snapshot = await chatRef
     .where("participantsId", "array-contains", id)
