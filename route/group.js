@@ -33,7 +33,7 @@ router.get("/", [auth], async (req, res) => {
   if (snapshot.empty) return res.status(200).send([]);
   const groups = [];
 
-  snapshot.forEach(async (doc) => {
+  snapshot.forEach((doc) => {
     let tmp = doc.data();
     groups.push({ id: doc.id, name: tmp.name, avatar: tmp.avatar });
   });
